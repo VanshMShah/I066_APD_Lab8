@@ -3,9 +3,13 @@ pipeline {
 
     stages {
 
-        stage('Clean Workspace') {
+        stage('Clean Kapil Repo') {
             steps {
-                deleteDir()
+                bat '''
+                if exist Jenkins_pipeline (
+                    rmdir /s /q Jenkins_pipeline
+                )
+                '''
             }
         }
 
