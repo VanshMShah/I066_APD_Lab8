@@ -17,7 +17,7 @@ pipeline {
 
         stage('Copy Files to My Repo') {
             steps {
-                bat 'xcopy Jenkins_pipeline\\* . /E /H /C /I /Y'
+                bat 'robocopy Jenkins_pipeline . /E /XD .git'
             }
         }
 
