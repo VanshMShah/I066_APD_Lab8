@@ -17,7 +17,10 @@ pipeline {
 
         stage('Copy Files to My Repo') {
             steps {
-                bat 'xcopy Jenkins_pipeline\\* . /E /H /C /I /Y /EXCLUDE:.git'
+                bat '''
+                robocopy Jenkins_pipeline . /E /XD .git
+                if %ERRORLEVEL% LEQ 7 exit /B 0
+                '''
             }
         }
 
@@ -35,19 +38,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'echo Building project'
+                bat 'Build.bat'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'echo Testing project'
+                bat 'Test.bat'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'echo Deploying project'
+                bat 'Deploy.bat'
             }
         }
 
