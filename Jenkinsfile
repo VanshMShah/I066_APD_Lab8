@@ -3,6 +3,12 @@ pipeline {
 
     stages {
 
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
         stage('Clone Kapil Repo') {
             steps {
                 bat 'git clone https://github.com/kapilrahtor/Jenkins_pipeline.git'
