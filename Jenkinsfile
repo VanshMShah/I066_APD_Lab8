@@ -17,11 +17,13 @@ pipeline {
 
         stage('Commit & Push to My Repo') {
             steps {
-                bat 'git config user.email "jenkins@lab.com"'
-                bat 'git config user.name "Jenkins"'
-                bat 'git add .'
-                bat 'git commit -m "Auto copied files from Kapil repo"'
-                bat 'git push origin master'
+                withCredentials([usernamePassword(credentialsId: 'github-token', usernameVariable: 'USER', passwordVariable: 'TOKEN')]) {
+                    bat 'git config user.email "jenkins@lab.com"'
+                    bat 'git config user.name "Jenkins"'
+                    bat 'git add .'
+                    bat 'git commit -m "Auto copied files from Kapil repo" || exit 0'
+                    bat 'git push https://%USER%:%TOKEN%@github.com/VanshMShah/I066_APD_Lab8.git HEAD:master'
+                }
             }
         }
 
