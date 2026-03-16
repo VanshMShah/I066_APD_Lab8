@@ -3,42 +3,45 @@ pipeline {
 
     stages {
 
-        stage('Pull from Git') {
+        stage('Clone Kapil Repo') {
             steps {
-                echo 'Cloning Kapil repository...'
-                git branch: 'main', url: 'https://github.com/kapilrahtor/Jenkins_pipeline.git'
+                bat 'git clone https://github.com/kapilrahtor/Jenkins_pipeline.git'
+            }
+        }
+
+        stage('Copy Files to My Repo') {
+            steps {
+                bat 'xcopy Jenkins_pipeline\\* . /E /H /C /I /Y'
+            }
+        }
+
+        stage('Commit & Push to My Repo') {
+            steps {
+                bat 'git config user.email "jenkins@lab.com"'
+                bat 'git config user.name "Jenkins"'
+                bat 'git add .'
+                bat 'git commit -m "Auto copied files from Kapil repo"'
+                bat 'git push origin master'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                bat 'echo Build stage completed'
+                bat 'echo Building project'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing the project...'
-                bat 'echo Test stage completed'
+                bat 'echo Testing project'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying the project...'
-                bat 'echo Deployment completed'
+                bat 'echo Deploying project'
             }
         }
 
-    }
-
-    post {
-        success {
-            echo 'Pipeline executed successfully'
-        }
-        failure {
-            echo 'Pipeline failed'
-        }
     }
 }
