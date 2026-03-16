@@ -5,28 +5,29 @@ pipeline {
 
         stage('Pull from Git') {
             steps {
-                git 'https://github.com/VanshMShah/I066_APD_Lab8.git'
+                echo 'Cloning the repository from GitHub...'
+                git branch: 'main', url: 'https://github.com/kapilrahtor/Jenkins_pipeline.git'
             }
         }
 
         stage('Build') {
             steps {
-                echo "Building the project..."
-                sh 'echo Build Successful'
+                echo 'Building the project...'
+                sh 'echo Build step completed'
             }
         }
 
         stage('Test') {
             steps {
-                echo "Running Tests..."
-                sh 'echo Tests Passed'
+                echo 'Running tests...'
+                sh 'echo Test step completed'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploying Application..."
-                sh 'echo Deployment Completed'
+                echo 'Deploying application...'
+                sh 'echo Deployment completed'
             }
         }
     }
