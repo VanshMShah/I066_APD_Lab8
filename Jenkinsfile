@@ -5,7 +5,7 @@ pipeline {
 
         stage('Pull from Git') {
             steps {
-                echo 'Cloning the repository from GitHub...'
+                echo 'Cloning Kapil repository...'
                 git branch: 'main', url: 'https://github.com/kapilrahtor/Jenkins_pipeline.git'
             }
         }
@@ -13,31 +13,32 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the project...'
-                bat 'echo Build step completed'
+                bat 'echo Build stage completed'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                bat 'echo Test step completed'
+                echo 'Testing the project...'
+                bat 'echo Test stage completed'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                echo 'Deploying the project...'
                 bat 'echo Deployment completed'
             }
         }
+
     }
 
     post {
         success {
-            echo 'Pipeline executed successfully!'
+            echo 'Pipeline executed successfully'
         }
         failure {
-            echo 'Pipeline failed!'
+            echo 'Pipeline failed'
         }
     }
 }
